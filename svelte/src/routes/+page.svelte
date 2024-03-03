@@ -1,0 +1,1 @@
+<h2 class = "text-green-800">Hola</h2>
