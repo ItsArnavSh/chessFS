@@ -3,11 +3,11 @@ use rocket::serde::json::Json;
 use rocket::http::Method;
 use rocket_cors::{AllowedOrigins, CorsOptions};
 
-#[get("/api/data")]
-fn get_data() -> Json<&'static str> {
-    Json("{\"message\": \"Hello from Rocket!\"}")
+#[get("/startmap")]
+fn start_map() -> Json<String> {
+    let map:String = String::from("{\"message\":\"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR\"}");
+    Json(map)
 }
-
 #[launch]
 fn rocket() -> _ {
     let allowed_origins = AllowedOrigins::some_exact(&[
@@ -21,5 +21,5 @@ fn rocket() -> _ {
         .to_cors()
         .unwrap();
 
-    rocket::build().mount("/", routes![get_data]).attach(cors)
+    rocket::build().mount("/", routes![start_map]).attach(cors)
 }

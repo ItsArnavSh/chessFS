@@ -1,21 +1,33 @@
 <script>
     import { onMount } from 'svelte';
   
+    let count = 0;
     let data;
-  
-    onMount(async () => {
-      const response = await fetch('http://localhost:8000/api/data');
+    async function fetchData() {
+    let address = 'http://localhost:8000/'+count
+      const response = await fetch(address);
       if (!response.ok) {
         console.error('Failed to fetch data:', response.status, response.statusText);
         return;
       }
       data = await response.json();
       data = JSON.parse(data);
-    });
-  </script>
-  
-  {#if data}
+    }
+
+    function increment() {
+      count += 1;
+    }
+
+    function handleClick() {
+      fetchData();
+      increment();
+    }
+</script>
+
+<button on:click={handleClick}>Fetch Data</button>
+
+{#if data}
     <p>{data.message}</p>
-  {:else}
+{:else}
     <p>Loading...</p>
-  {/if}
+{/if}
