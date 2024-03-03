@@ -1,1 +1,6 @@
-<h2 class = "text-green-800">Hola</h2>
+<script>
+    let index = 0;
+    function change()
+    {}
+</script>
+<a href = "/game">Play</a>
